@@ -1,3 +1,4 @@
+export PATH := /home/adam/tools/gcc-arm-none-eabi-7-2017-q4-major/bin:$(PATH)
 BOARD=zero
 -include Makefile.user
 include boards/$(BOARD)/board.mk
@@ -29,9 +30,11 @@ $(WFLAGS)
 UF2_VERSION_BASE = $(shell git describe --dirty --always --tags)
 
 ifeq ($(CHIP_FAMILY), samd21)
-LINKER_SCRIPT=scripts/samd21j18a.ld
+#LINKER_SCRIPT=scripts/samd21j18a.ld
+LINKER_SCRIPT=scripts/samd21e17a.ld
 BOOTLOADER_SIZE=8192
-SELF_LINKER_SCRIPT=scripts/samd21j18a_self.ld
+#SELF_LINKER_SCRIPT=scripts/samd21j18a_self.ld
+SELF_LINKER_SCRIPT=scripts/samd21e17a_self.ld
 endif
 
 ifeq ($(CHIP_FAMILY), samd51)

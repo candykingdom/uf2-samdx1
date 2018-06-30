@@ -158,15 +158,16 @@
 
 /*
 From CPU config:
-#define FLASH_SIZE            0x8000UL
+#define FLASH_SIZE            0x20000UL
 #define FLASH_PAGE_SIZE       64
-#define FLASH_NB_OF_PAGES     512
+#define FLASH_NB_OF_PAGES     2048
 */
 
 // These two need to be defined as plain decimal numbers, as we're using # on them
 #define FLASH_ROW_SIZE 256
 #ifndef FLASH_NUM_ROWS
-#define FLASH_NUM_ROWS 1024
+//#define FLASH_NUM_ROWS 1024
+#define FLASH_NUM_ROWS 512
 #endif
 
 #define NOOP                                                                                       \
