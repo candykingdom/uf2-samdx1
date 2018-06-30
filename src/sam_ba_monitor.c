@@ -29,7 +29,12 @@
 
 #include "uf2.h"
 
-static const char fullVersion[] = "v" SAM_BA_VERSION " [Arduino:XYZ] " __DATE__ " " __TIME__ "\n\r";
+// This is the original line from the Adafruit version:
+// static const char fullVersion[] = "v" SAM_BA_VERSION " [Arduino:XYZ] " __DATE__ " " __TIME__ "\n\r";
+// Note: XYZ isn't nonsense, it tells Bossa which commands are supported. For
+// some reason, the write buffer method fails. This feature is controlled by
+// 'Y', so don't include it.
+static const char fullVersion[] = "v" SAM_BA_VERSION " [Arduino:XZ] " __DATE__ " " __TIME__ "\n\r";
 
 /* b_terminal_mode mode (ascii) or hex mode */
 #if USE_CDC_TERMINAL
