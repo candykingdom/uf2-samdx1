@@ -16,12 +16,12 @@
 
 #define BOARD_ID "SAMD21E17A-Firefly-v2"
 
-#define LED_PIN PIN_PA17 // Not actually connected
+#define LED_PIN PIN_PA27
 
 
 // TODO: why doesn't this work?
-// #define BOARD_NEOPIXEL_PIN PIN_PA07
-// #define BOARD_NEOPIXEL_COUNT 4
+#define BOARD_NEOPIXEL_PIN PIN_PA07
+#define BOARD_NEOPIXEL_COUNT 4
 
 
 #endif
