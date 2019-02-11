@@ -10,9 +10,8 @@
 #define VOLUME_LABEL "FIREFLY-V2"
 
 
-// TODO: Do we need our own VID/PID?
-#define USB_VID 0x03EB   // Atmel
-#define USB_PID 0x2402   // Generic HID device
+#define USB_VID 0xF182   // LeapMotion
+#define USB_PID 0x8001
 
 #define BOARD_ID "SAMD21E17A-Firefly-v2"
 
