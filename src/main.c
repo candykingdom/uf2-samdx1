@@ -163,6 +163,15 @@ extern char _end;
  *  \return Unused (ANSI-C compatibility).
  */
 int main(void) {
+    // Disable the watchdog, in case the application set it.
+#if defined(__SAMD51__)
+    WDT->CTRLA.reg = 0;
+    while(WDT->SYNCBUSY.reg);
+#else
+    WDT->CTRL.reg = 0;
+    while(WDT->STATUS.bit.SYNCBUSY);
+#endif
+
     // if VTOR is set, we're not running in bootloader mode; halt
     if (SCB->VTOR)
         while (1) {
