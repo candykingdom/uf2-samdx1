@@ -30,7 +30,7 @@ a UF2 file is written and immediately write it to flash.
 * USB CDC (Serial emulation) monitor mode compatible with Arduino
   (including XYZ commands) and BOSSA flashing tool
 * USB MSC interface for writing UF2 files
-* reading of the contests of the flash as an UF2 file via USB MSC
+* reading of the content of the flash as an UF2 file via USB MSC
 * UART Serial (real serial wire) monitor mode (typically disabled due to space constraints)
 * In-memory logging for debugging - use the `logs` target to extract the logs using `openocd`
 * double-tap reset to stay in the bootloader mode
