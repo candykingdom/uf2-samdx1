@@ -1,9 +1,9 @@
 /**
  * \file
  *
- * \brief gcc starttup file for SAMD51
+ * \brief gcc starttup file for SAME51
  *
- * Copyright (c) 2017 Microchip Technology Inc.
+ * Copyright (c) 2019 Microchip Technology Inc.
  *
  * \asf_license_start
  *
@@ -14,9 +14,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License"); you may
  * not use this file except in compliance with the License.
  * You may obtain a copy of the Licence at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,8 +27,7 @@
  *
  */
 
-#include "sam.h"
-#include "component-version.h"
+#include "same51.h"
 
 /* Initialize segments */
 extern uint32_t _sfixed;
@@ -51,13 +50,13 @@ void __libc_init_array(void);
 void Dummy_Handler(void);
 
 /* Cortex-M4 core handlers */
-void NMI_Handler             ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
+void NonMaskableInt_Handler  ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
 void HardFault_Handler       ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
-void MemManage_Handler       ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
+void MemManagement_Handler   ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
 void BusFault_Handler        ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
 void UsageFault_Handler      ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
-void SVC_Handler             ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
-void DebugMon_Handler        ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
+void SVCall_Handler          ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
+void DebugMonitor_Handler    ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
 void PendSV_Handler          ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
 void SysTick_Handler         ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
 
@@ -104,8 +103,6 @@ void EVSYS_2_Handler         ( void ) __attribute__ ((weak, alias("Dummy_Handler
 void EVSYS_3_Handler         ( void ) __attribute__ ((weak, alias("Dummy_Handler"))); /* EVSYS_EVD_3, EVSYS_OVR_3 */
 void EVSYS_4_Handler         ( void ) __attribute__ ((weak, alias("Dummy_Handler"))); /* EVSYS_EVD_10, EVSYS_EVD_11, EVSYS_EVD_4, EVSYS_EVD_5, EVSYS_EVD_6, EVSYS_EVD_7, EVSYS_EVD_8, EVSYS_EVD_9, EVSYS_OVR_10, EVSYS_OVR_11, EVSYS_OVR_4, EVSYS_OVR_5, EVSYS_OVR_6, EVSYS_OVR_7, EVSYS_OVR_8, EVSYS_OVR_9 */
 void PAC_Handler             ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
-void TAL_0_Handler           ( void ) __attribute__ ((weak, alias("Dummy_Handler"))); /* TAL_BRK */
-void TAL_1_Handler           ( void ) __attribute__ ((weak, alias("Dummy_Handler"))); /* TAL_IPS_0, TAL_IPS_1 */
 void RAMECC_Handler          ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
 void SERCOM0_0_Handler       ( void ) __attribute__ ((weak, alias("Dummy_Handler"))); /* SERCOM0_0 */
 void SERCOM0_1_Handler       ( void ) __attribute__ ((weak, alias("Dummy_Handler"))); /* SERCOM0_1 */
@@ -245,30 +242,17 @@ const DeviceVectors exception_table = {
         .pvStack                = (void*) (&_estack),
 
         .pfnReset_Handler       = (void*) Reset_Handler,
-#if COMPONENT_VERSION >= 10001
-        .pfnNonMaskableInt_Handler = (void*) NMI_Handler,
-#else
-        .pfnNMI_Handler         = (void*) NMI_Handler,
-#endif
+        .pfnNonMaskableInt_Handler = (void*) NonMaskableInt_Handler,
         .pfnHardFault_Handler   = (void*) HardFault_Handler,
-#if COMPONENT_VERSION >= 10001
-        .pfnMemManagement_Handler = (void*) MemManage_Handler,
-#else
-        .pfnMemManage_Handler   = (void*) MemManage_Handler,
-#endif
+        .pfnMemManagement_Handler = (void*) MemManagement_Handler,
         .pfnBusFault_Handler    = (void*) BusFault_Handler,
         .pfnUsageFault_Handler  = (void*) UsageFault_Handler,
         .pvReservedM9           = (void*) (0UL), /* Reserved */
         .pvReservedM8           = (void*) (0UL), /* Reserved */
         .pvReservedM7           = (void*) (0UL), /* Reserved */
         .pvReservedM6           = (void*) (0UL), /* Reserved */
-#if COMPONENT_VERSION >= 10001
-        .pfnSVCall_Handler      = (void*) SVC_Handler,
-        .pfnDebugMonitor_Handler    = (void*) DebugMon_Handler,
-#else
-        .pfnSVC_Handler         = (void*) SVC_Handler,
-        .pfnDebugMon_Handler    = (void*) DebugMon_Handler,
-#endif
+        .pfnSVCall_Handler      = (void*) SVCall_Handler,
+        .pfnDebugMonitor_Handler = (void*) DebugMonitor_Handler,
         .pvReservedM3           = (void*) (0UL), /* Reserved */
         .pfnPendSV_Handler      = (void*) PendSV_Handler,
         .pfnSysTick_Handler     = (void*) SysTick_Handler,
@@ -316,13 +300,8 @@ const DeviceVectors exception_table = {
         .pfnEVSYS_3_Handler     = (void*) EVSYS_3_Handler,        /* 39 EVSYS_EVD_3, EVSYS_OVR_3 */
         .pfnEVSYS_4_Handler     = (void*) EVSYS_4_Handler,        /* 40 EVSYS_EVD_10, EVSYS_EVD_11, EVSYS_EVD_4, EVSYS_EVD_5, EVSYS_EVD_6, EVSYS_EVD_7, EVSYS_EVD_8, EVSYS_EVD_9, EVSYS_OVR_10, EVSYS_OVR_11, EVSYS_OVR_4, EVSYS_OVR_5, EVSYS_OVR_6, EVSYS_OVR_7, EVSYS_OVR_8, EVSYS_OVR_9 */
         .pfnPAC_Handler         = (void*) PAC_Handler,            /* 41 Peripheral Access Controller */
-#if COMPONENT_VERSION >= 10001
         .pvReserved42           = (void*) (0UL),                  /* 42 Reserved */
         .pvReserved43           = (void*) (0UL),                  /* 43 Reserved */
-#else
-        .pfnTAL_0_Handler       = (void*) TAL_0_Handler,          /* 42 TAL_BRK */
-        .pfnTAL_1_Handler       = (void*) TAL_1_Handler,          /* 43 TAL_IPS_0, TAL_IPS_1 */
-#endif
         .pvReserved44           = (void*) (0UL),                  /* 44 Reserved */
         .pfnRAMECC_Handler      = (void*) RAMECC_Handler,         /* 45 RAM ECC */
         .pfnSERCOM0_0_Handler   = (void*) SERCOM0_0_Handler,      /* 46 SERCOM0_0 */
@@ -548,7 +527,7 @@ void Reset_Handler(void)
 #endif
 
         /* Initialize the C library */
-        //__libc_init_array();
+        __libc_init_array();
 
         /* Branch to main function */
         main();
