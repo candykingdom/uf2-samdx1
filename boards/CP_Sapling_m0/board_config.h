@@ -3,7 +3,7 @@
 
 #define CRYSTALLESS 1
 
-#define VENDOR_NAME "Oak development Technologies"
+#define VENDOR_NAME "Oak Development Technologies"
 #define PRODUCT_NAME "CP Sapling"
 #define VOLUME_LABEL "SapBOOT"
 #define INDEX_URL ""
