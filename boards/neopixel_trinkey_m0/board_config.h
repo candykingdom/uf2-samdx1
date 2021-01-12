@@ -6,7 +6,7 @@
 #define VENDOR_NAME "Adafruit Industries"
 #define PRODUCT_NAME "NeoPixel Trinkey M0"
 #define VOLUME_LABEL "TRINKEYBOOT"
-#define INDEX_URL "http://adafru.it/"
+#define INDEX_URL "http://adafru.it/4870"
 #define BOARD_ID "SAMD21E18A-NeoTrinkey-v0"
 
 #define USB_VID 0x239A
