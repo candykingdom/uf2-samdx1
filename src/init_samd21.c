@@ -60,15 +60,6 @@ void system_init(void) {
   SYSCTRL->DFLLCTRL.reg |= SYSCTRL_DFLLCTRL_ENABLE ;
   dfll_sync();
 
-  GCLK_CLKCTRL_Type clkctrl={0};
-  uint16_t temp;
-  GCLK->CLKCTRL.bit.ID = 2; // GCLK_ID - DFLL48M Reference
-  temp = GCLK->CLKCTRL.reg;
-  clkctrl.bit.CLKEN = 1;
-  clkctrl.bit.WRTLOCK = 0;
-  clkctrl.bit.GEN = GCLK_CLKCTRL_GEN_GCLK0_Val;
-  GCLK->CLKCTRL.reg = (clkctrl.reg | temp);
-
 #else
 
     SYSCTRL->XOSC32K.reg =
