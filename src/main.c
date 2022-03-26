@@ -56,11 +56,18 @@
  *
  * Clock system
  * --------------------
- * CPU clock source (GCLK_GEN_0) - 8MHz internal oscillator (OSC8M)
- * SERCOM5 core GCLK source (GCLK_ID_SERCOM5_CORE) - GCLK_GEN_0 (i.e., OSC8M)
- * GCLK Generator 1 source (GCLK_GEN_1) - 48MHz DFLL in Clock Recovery mode
+ * CPU clock source (GCLK_GEN_0) - 48MHz DFLL oscillator (DFLL48M)
+ * SERCOM5 core GCLK source (GCLK_ID_SERCOM5_CORE) - GCLK_GEN_0 (i.e., FDLL48M)
+ * USB GCLK source (GCLK_ID_USB) - GCLK_GEN_0 (i.e., DFLL in CRM or open loop mode)
+ *
+ * Crystalless mode:
+ * GCLK Generator 0 source (GCLK_GEN_0) - 48MHz DFLL in Clock Recovery mode
  * (DFLL48M)
- * USB GCLK source (GCLK_ID_USB) - GCLK_GEN_1 (i.e., DFLL in CRM mode)
+ *
+ * Crytal mode:
+ * GCLK Generator 0 source (GCLK_GEN_0) - 48MHz DFLL in closed loop mode
+ * GCLK Generator 1 source (GCLK_GEN_1) - 32 kHz external cyrstal (XOSC32K)
+ * DFLL48M Refence clock (GCLK_DFLL48M_REF) - GCLK_GEN_1 (i.e., XOSC32K)
  *
  * Memory Mapping
  * --------------------
