@@ -106,7 +106,7 @@ const char hidDescriptor[] = {
 #endif
 
 #ifndef USB_POWER_MA
-#define USB_POWER_MA 500
+#define USB_POWER_MA 100
 #endif
 __attribute__((__aligned__(4)))
 char cfgDescriptor[] = {
