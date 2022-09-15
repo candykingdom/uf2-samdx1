@@ -115,8 +115,8 @@ void usart_open() {
     clkctrl.bit.WRTLOCK = false;
     clkctrl.bit.GEN = GCLK_CLKCTRL_GEN_GCLK0_Val;
     GCLK->CLKCTRL.reg = (clkctrl.reg | temp);
-    /* Baud rate 115200 - clock 8MHz -> BAUD value-50436 */
-    uart_basic_init(BOOT_USART_MODULE, 50436, BOOT_USART_PAD_SETTINGS);
+    /* Baud rate 115200 - clock 48MHz -> BAUD value-63018 */
+    uart_basic_init(BOOT_USART_MODULE, 63018, BOOT_USART_PAD_SETTINGS);
     #endif
 
     #ifdef SAMD51
