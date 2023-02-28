@@ -194,13 +194,6 @@ int main(void) {
     uint32_t zeros[2] = {0, 0};
     flash_write_words((void *)(BOOTLOADER_K * 1024), zeros, 2);
 
-    for (uint32_t i = 0; i < 8; ++i) {
-        LED_MSC_TGL();
-        delay(1000);
-    }
-
-    LED_MSC_OFF();
-
 #ifdef SAMD21
     // Re-enable BOOTPROT
     set_fuses_and_bootprot(2); // 8k
@@ -208,6 +201,7 @@ int main(void) {
     // For the SAMD51, the boot protection will automatically be re-enabled on
     // reset.
 
+    LED_MSC_OFF();
     resetIntoBootloader();
 
     // We should not reach here normally.
