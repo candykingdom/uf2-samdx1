@@ -520,7 +520,7 @@ void I2S_Handler                 ( void );
 /**  MEMORY MAPPING DEFINITIONS FOR SAMD21E17A */
 /* ************************************************************************** */
 
-#define FLASH_SIZE            _UL(0x00020000) /* 128 kB */
+#define FLASH_SIZE            _UL(0x00020000 - 0x2000) /* 128 kB */
 #define FLASH_PAGE_SIZE       64
 #define FLASH_NB_OF_PAGES     2048
 #define FLASH_USER_PAGE_SIZE  64
